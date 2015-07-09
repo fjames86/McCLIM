@@ -222,6 +222,7 @@
 	     ;; FIXME: the radar doesn't seem to do anything except take
 	     ;; up vast amounts of space.
 	     #+(or) radar
+	     radar
 	     text-edit)
 	   (vertically ()
 	     push-btn
@@ -236,7 +237,7 @@
   ;; FIXME: Timer events appear to have rotted.
   ;; Also, the following won't work because the frame has not really been realized yet,
   ;; so you can't get at its panes. Yet it has worked, and recently. Odd.
-  ;; (clim-internals::schedule-timer-event (find-pane-named frame 'radar) 'radiate 0.1)
+  (clim-internals::schedule-timer-event (find-pane-named frame 'radar) 'radiate 0.1)
   (call-next-method))
 
 (defclass radar-pane (basic-gadget) (
@@ -283,7 +284,7 @@
                 (draw-ellipse* pane x y
                                     0 ory
                                     orx 0
-                                    :ink +white+ :filled nil))))))))
+                                    :ink clim:+background-ink+ :filled nil))))))))
   (clim-internals::schedule-timer-event pane 'radiate 0.1))
 
 #-sbcl

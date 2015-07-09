@@ -81,9 +81,9 @@
 (defmethod event-queue-read ((eq standard-event-queue))
   "Reads one event from the queue, if there is no event, hang until here is one."
   (let ((lock (event-queue-lock eq)))
-    (with-lock-held (lock)
-      (loop
-	 (check-schedule eq)
+    (loop
+       (check-schedule eq)
+       (with-lock-held (lock)
 	 (let ((res (event-queue-read-no-hang/locked eq)))
 	   (when res
 	     (return res))

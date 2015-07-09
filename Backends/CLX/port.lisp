@@ -213,13 +213,13 @@
 
 (defun parse-clx-server-path (path)
   (pop path)
-  (if path
+;;  (if path
       (list :clx
 	    :host       (getf path :host "localhost")
 	    :display-id (getf path :display-id 0)
 	    :screen-id  (getf path :screen-id 0)
-	    :protocol   (getf path :protocol :internet))
-      (helpfully-automagic-clx-server-path)))
+	    :protocol   (getf path :protocol :internet)))
+;;      (helpfully-automagic-clx-server-path)))
 
 (setf (get :x11 :port-type) 'clx-port)
 (setf (get :x11 :server-path-parser) 'parse-clx-server-path)
